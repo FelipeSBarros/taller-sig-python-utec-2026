@@ -2,6 +2,12 @@
 
 Material del taller "Introducción al SIG con Python" de las Primeras Jornadas de Innovación Geoespacial (UTEC, Minas, Lavalleja, 16 de octubre de 2026). A través de ejercicios prácticos en Google Colab aprendemos a cargar, explorar y visualizar datos geográficos con Python.
 
+## Notebook
+
+[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FelipeSBarros/taller-sig-python-utec-2026/blob/main/T1_Introduccion_SIG_Python.ipynb)
+
+`T1_Introduccion_SIG_Python.ipynb`: datos vectoriales (shapefile y geopackage), mapas con geopandas, densidad de kernel con geoplot para leer el patrón espacial y espacio-temporal de los focos de calor, y datos ráster (MDT, Sentinel-2 y NDVI). Las celdas marcadas con ✏️ son para completar.
+
 ## Datos (`datos/`)
 
 | Archivo | Tipo | Contenido | CRS |

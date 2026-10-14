@@ -1,0 +1,5 @@
+geopandas
+geoplot
+rasterio
+matplotlib
+requests
