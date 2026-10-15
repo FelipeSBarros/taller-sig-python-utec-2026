@@ -6,7 +6,11 @@ Material del taller "Introducción al SIG con Python" de las Primeras Jornadas d
 
 [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FelipeSBarros/taller-sig-python-utec-2026/blob/main/T1_Introduccion_SIG_Python.ipynb)
 
-`T1_Introduccion_SIG_Python.ipynb`: datos vectoriales (shapefile y geopackage), mapas con geopandas, densidad de kernel con geoplot para leer el patrón espacial y espacio-temporal de los focos de calor, y datos ráster (MDT, Sentinel-2 y NDVI). Las celdas marcadas con ✏️ son para completar.
+`T1_Introduccion_SIG_Python.ipynb`: datos vectoriales (shapefile y geopackage), mapas con geopandas, densidad de kernel con geoplot para leer el patrón espacial y espacio-temporal de los focos de calor, y datos ráster (MDT, Sentinel-2 y NDVI). Las celdas que empiezan con `# Ejercicio` son para completar.
+
+**Entrega del mapa final:** subí tu mapa (`apellido_nombre.png`) al formulario https://forms.gle/AF5s89nZzDozbyVj6 hasta las 23:59 del viernes 16 de octubre de 2026.
+
+<img width=200 src="img/qr_formulario.png" alt="Código QR del formulario de entrega">
 
 ## Datos (`datos/`)
 
