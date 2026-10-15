@@ -1,14 +1,22 @@
-# Taller: Introducción al SIG con Python
+# Talleres: SIG y Redes Urbanas con Python
 
-Material del taller "Introducción al SIG con Python" de las Primeras Jornadas de Innovación Geoespacial (UTEC, Minas, Lavalleja, 16 de octubre de 2026). A través de ejercicios prácticos en Google Colab aprendemos a cargar, explorar y visualizar datos geográficos con Python.
+Material de los talleres "Introducción al SIG con Python" y "Python para Redes Urbanas" de las Primeras Jornadas de Innovación Geoespacial (UTEC, Minas, Lavalleja, 16 de octubre de 2026). A través de ejercicios prácticos en Google Colab aprendemos a cargar, explorar y visualizar datos geográficos con Python, y a analizar la ciudad como una red de calles.
 
-## Notebook
+## Notebooks
+
+### Taller 1: Introducción al SIG con Python
 
 [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FelipeSBarros/taller-sig-python-utec-2026/blob/main/T1_Introduccion_SIG_Python.ipynb)
 
 `T1_Introduccion_SIG_Python.ipynb`: datos vectoriales (shapefile y geopackage), mapas con geopandas, densidad de kernel con geoplot para leer el patrón espacial y espacio-temporal de los focos de calor, y datos ráster (MDT, Sentinel-2 y NDVI). Las celdas que empiezan con `# Ejercicio` son para completar.
 
-**Entrega del mapa final:** subí tu mapa (`apellido_nombre.png`) al formulario https://forms.gle/AF5s89nZzDozbyVj6 hasta las 23:59 del viernes 16 de octubre de 2026.
+### Taller 2: Python para Redes Urbanas
+
+[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FelipeSBarros/taller-sig-python-utec-2026/blob/main/T2_Python_Redes_Urbanas.ipynb)
+
+`T2_Python_Redes_Urbanas.ipynb`: la red de calles de Minas como grafo (OSMnx y OpenStreetMap), geocodificación, nodo más cercano y camino más corto, cómo funciona el algoritmo de Dijkstra, rutas por distancia y por tiempo, rutas que evitan la altitud con el MDT, y orientación de las calles.
+
+**Entrega del mapa final (los dos talleres):** subí tu mapa (`apellido_nombre.png`) al formulario https://forms.gle/AF5s89nZzDozbyVj6 hasta las 23:59 del viernes 16 de octubre de 2026.
 
 <img width=200 src="img/qr_formulario.png" alt="Código QR del formulario de entrega">
 
@@ -19,6 +27,8 @@ Material del taller "Introducción al SIG con Python" de las Primeras Jornadas d
 | `focos_firms_uy.zip` | Shapefile (puntos) | 21.307 focos de calor VIIRS S-NPP en Uruguay, 2018–2024 | EPSG:4326 |
 | `taller1_uy.gpkg` | Geopackage (5 capas) | `departamentos`, `lavalleja`, `minas`, `cuenca_rio_negro`, `comunicaciones_proyecto` | EPSG:4326 |
 | `mdt_minas.tif` | Ráster monobanda | Modelo digital del terreno de Minas y alrededores (5 m, altitud en metros) | EPSG:5382 |
+| `grafo_minas_drive.graphml` | Grafo (GraphML) | Red de calles para autos de Minas (OpenStreetMap, octubre de 2026), respaldo para el T2 | EPSG:4326 |
+| `grafo_minas_walk.graphml` | Grafo (GraphML) | Red peatonal de Minas (OpenStreetMap, octubre de 2026), respaldo para el T2 | EPSG:4326 |
 | `sentinel2_minas.tif` | Ráster multibanda | Sentinel-2 L2A del 28/02/2026, 16 × 16 km centrado en Minas (10 m). Bandas: 1 azul (B02), 2 verde (B03), 3 rojo (B04), 4 infrarrojo cercano (B08). Reflectancia × 10.000 | EPSG:32721 |
 
 ### Cómo cargarlos en Colab
@@ -32,6 +42,12 @@ focos = gpd.read_file(URL + "focos_firms_uy.zip")
 gpd.list_layers(URL + "taller1_uy.gpkg")
 deptos = gpd.read_file(URL + "taller1_uy.gpkg", layer="departamentos")
 mdt = rasterio.open(URL + "mdt_minas.tif")
+
+# grafos (OSMnx necesita el archivo local)
+import urllib.request
+import osmnx as ox
+urllib.request.urlretrieve(URL + "grafo_minas_drive.graphml", "grafo_minas_drive.graphml")
+G = ox.load_graphml("grafo_minas_drive.graphml")
 ```
 
 ### Columnas de `focos_firms_uy`
@@ -60,8 +76,9 @@ Solo se incluyen los focos de tipo 0 ("vegetación probable") que caen dentro de
 - **Focos de calor:** NASA FIRMS, VIIRS S-NPP 375 m, archivo anual por país (https://firms.modaps.eosdis.nasa.gov/country/). *We acknowledge the use of data and/or imagery from NASA's Fire Information for Resource Management System (FIRMS), part of NASA's Earth Science Data and Information System (ESDIS).*
 - **Departamentos y Comunicaciones de Proyecto:** Observatorio Ambiental Nacional (OAN), Ministerio de Ambiente, capas `c004` y `c1296` (https://www.ambiente.gub.uy/oan/).
 - **Minas, cuenca del Río Negro y MDT:** Infraestructura de Datos Espaciales de Uruguay (IDEuy), servicios WFS de `mapas.ide.uy` (localidades censales INE, cuencas hidrográficas nivel 2 y MDT nacional de 2,5 m).
+- **Redes de calles:** © colaboradores de OpenStreetMap, disponibles bajo la licencia Open Database License (ODbL), https://www.openstreetmap.org/copyright.
 - **Imagen satelital:** contiene datos modificados de Copernicus Sentinel-2 (2026), obtenidos de Earth Search (Element 84, AWS Open Data).
 
 ## Cómo se prepararon
 
-Los scripts de `preparacion/` descargan los datos de las fuentes originales y generan los archivos de `datos/`: `01_vectores.py` (shapefile y geopackage) y `02_raster.py` (MDT y Sentinel-2; acepta otra fecha como argumento, p. ej. `python 02_raster.py 2026-02-08`). Requieren `geopandas`, `rasterio` y `requests`.
+Los scripts de `preparacion/` descargan los datos de las fuentes originales y generan los archivos de `datos/`: `01_vectores.py` (shapefile y geopackage) y `02_raster.py` (MDT y Sentinel-2; acepta otra fecha como argumento, p. ej. `python 02_raster.py 2026-02-08`) `03_grafos.py` (grafos de Minas) y `04_grafo_juguete.py` (figuras del grafo de juguete del T2, en `img/`). Requieren `geopandas`, `rasterio`, `requests` y `osmnx`.

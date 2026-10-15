@@ -4,3 +4,4 @@ rasterio
 earthpy
 matplotlib
 requests
+osmnx
