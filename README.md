@@ -31,25 +31,6 @@ Material de los talleres "Introducción al SIG con Python" y "Python para Redes 
 | `grafo_minas_walk.graphml` | Grafo (GraphML) | Red peatonal de Minas (OpenStreetMap, octubre de 2026), respaldo para el T2 | EPSG:4326 |
 | `sentinel2_minas.tif` | Ráster multibanda | Sentinel-2 L2A del 28/02/2026, 16 × 16 km centrado en Minas (10 m). Bandas: 1 azul (B02), 2 verde (B03), 3 rojo (B04), 4 infrarrojo cercano (B08). Reflectancia × 10.000 | EPSG:32721 |
 
-### Cómo cargarlos en Colab
-
-```python
-import geopandas as gpd
-import rasterio
-
-URL = "https://raw.githubusercontent.com/FelipeSBarros/taller-sig-python-utec-2026/main/datos/"
-focos = gpd.read_file(URL + "focos_firms_uy.zip")
-gpd.list_layers(URL + "taller1_uy.gpkg")
-deptos = gpd.read_file(URL + "taller1_uy.gpkg", layer="departamentos")
-mdt = rasterio.open(URL + "mdt_minas.tif")
-
-# grafos (OSMnx necesita el archivo local)
-import urllib.request
-import osmnx as ox
-urllib.request.urlretrieve(URL + "grafo_minas_drive.graphml", "grafo_minas_drive.graphml")
-G = ox.load_graphml("grafo_minas_drive.graphml")
-```
-
 ### Columnas de `focos_firms_uy`
 
 | Columna | Descripción |
@@ -79,6 +60,3 @@ Solo se incluyen los focos de tipo 0 ("vegetación probable") que caen dentro de
 - **Redes de calles:** © colaboradores de OpenStreetMap, disponibles bajo la licencia Open Database License (ODbL), https://www.openstreetmap.org/copyright.
 - **Imagen satelital:** contiene datos modificados de Copernicus Sentinel-2 (2026), obtenidos de Earth Search (Element 84, AWS Open Data).
 
-## Cómo se prepararon
-
-Los scripts de `preparacion/` descargan los datos de las fuentes originales y generan los archivos de `datos/`: `01_vectores.py` (shapefile y geopackage) y `02_raster.py` (MDT y Sentinel-2; acepta otra fecha como argumento, p. ej. `python 02_raster.py 2026-02-08`) `03_grafos.py` (grafos de Minas) y `04_grafo_juguete.py` (figuras del grafo de juguete del T2, en `img/`). Requieren `geopandas`, `rasterio`, `requests` y `osmnx`.
