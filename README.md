@@ -1,5 +1,12 @@
 # Talleres: SIG y Redes Urbanas con Python
 
+<p>
+  <img src="img/logos/UNaM.png" height="60" alt="Universidad Nacional de Misiones (UNaM)">&nbsp;&nbsp;
+  <img src="img/logos/FCF.png" height="60" alt="Facultad de Ciencias Forestales (FCF, UNaM)">&nbsp;&nbsp;
+  <img src="img/logos/UTEC.svg" height="60" alt="Universidad Tecnológica del Uruguay (UTEC)">&nbsp;&nbsp;
+  <img src="img/logos/GIEx.jpg" height="60" alt="Grupo de Investigaciones Espaciales (GIEx, UTEC)">
+</p>
+
 Material de los talleres "Introducción al SIG con Python" y "Python para Redes Urbanas" de las Primeras Jornadas de Innovación Geoespacial (UTEC, Minas, Lavalleja, 16 de octubre de 2026). A través de ejercicios prácticos en Google Colab aprendemos a cargar, explorar y visualizar datos geográficos con Python, y a analizar la ciudad como una red de calles.
 
 ## Notebooks
@@ -16,9 +23,9 @@ Material de los talleres "Introducción al SIG con Python" y "Python para Redes 
 
 `T2_Python_Redes_Urbanas.ipynb`: la red de calles de Minas como grafo (OSMnx y OpenStreetMap), geocodificación, nodo más cercano y camino más corto, cómo funciona el algoritmo de Dijkstra, rutas por distancia y por tiempo, rutas que evitan la altitud con el MDT, y orientación de las calles.
 
-**Entrega del mapa final (los dos talleres):** subí tu mapa (`apellido_nombre.png`) al formulario https://forms.gle/AF5s89nZzDozbyVj6 hasta las 23:59 del viernes 16 de octubre de 2026.
+~~**Entrega del mapa final (los dos talleres):** subí tu mapa (`apellido_nombre.png`) al formulario https://forms.gle/AF5s89nZzDozbyVj6 hasta las 23:59 del viernes 16 de octubre de 2026.~~
 
-<img width=200 src="img/qr_formulario.png" alt="Código QR del formulario de entrega">
+**Entrega cerrada:** el plazo venció el 16 de octubre de 2026 y el formulario ya no acepta respuestas. Los notebooks siguen disponibles para practicar.
 
 ## Datos (`datos/`)
 
